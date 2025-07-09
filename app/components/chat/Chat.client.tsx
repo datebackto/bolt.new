@@ -4,6 +4,7 @@ import { useChat } from 'ai/react';
 import { useAnimate } from 'framer-motion';
 import { memo, useEffect, useRef, useState } from 'react';
 import { cssTransition, toast, ToastContainer } from 'react-toastify';
+import * as React from 'react';
 import { useMessageParser, usePromptEnhancer, useShortcuts, useSnapScroll } from '~/lib/hooks';
 import { useChatHistory } from '~/lib/persistence';
 import { chatStore } from '~/lib/stores/chat';
@@ -30,7 +31,7 @@ export function Chat() {
     <>
       {ready && <ChatImpl initialMessages={initialMessages} storeMessageHistory={storeMessageHistory} />}
       <ToastContainer
-        closeButton={({ closeToast }) => {
+        closeButton={({ closeToast }: { closeToast: (e: React.MouseEvent<HTMLElement>) => void }) => {
           return (
             <button className="Toastify__close-button" onClick={closeToast}>
               <div className="i-ph:x text-lg" />
@@ -219,7 +220,7 @@ export const ChatImpl = memo(({ initialMessages, storeMessageHistory }: ChatProp
       scrollRef={scrollRef}
       handleInputChange={handleInputChange}
       handleStop={abort}
-      messages={messages.map((message, i) => {
+      messages={messages.map((message: Message, i: number) => {
         if (message.role === 'user') {
           return message;
         }

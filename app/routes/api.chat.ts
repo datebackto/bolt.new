@@ -16,7 +16,7 @@ async function chatAction({ context, request }: ActionFunctionArgs) {
   try {
     const options: StreamingOptions = {
       toolChoice: 'none',
-      onFinish: async ({ text: content, finishReason }) => {
+      onFinish: async ({ text: content, finishReason }: { text: string; finishReason: string | undefined }) => {
         if (finishReason !== 'length') {
           return stream.close();
         }
