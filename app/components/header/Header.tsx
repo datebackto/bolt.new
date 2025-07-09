@@ -28,9 +28,7 @@ export function Header() {
       <span className="flex-1 px-4 truncate text-center text-bolt-elements-textPrimary">
         <ClientOnly>{() => <ChatDescription />}</ClientOnly>
       </span>
-      {chat.started && (
-        <ClientOnly>{() => <ModelSelector />}</ClientOnly>
-      )}
+      {chat.started && <ClientOnly>{() => <ModelSelector />}</ClientOnly>}
       {chat.started && (
         <ClientOnly>
           {() => (
